@@ -1,0 +1,5 @@
+{
+  "api": {
+    "baseUrl": "http://localhost.proxyman.io:8080"
+  }
+}
