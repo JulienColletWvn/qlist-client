@@ -8,7 +8,7 @@ const Container = styled.div`
 `;
 
 const Heading = styled.h1`
-  font-family: "Bitter", serif;
+  font-family: "Lora", serif;
   margin: 0;
   z-index: 1;
 `;

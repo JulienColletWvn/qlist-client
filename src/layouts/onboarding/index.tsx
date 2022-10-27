@@ -1,7 +1,6 @@
 import { PropsWithChildren } from "react";
 import styled from "styled-components";
-
-import Grid from "../../components/grid";
+import { Row, Col } from "../../layouts";
 
 const ImageContent = styled.div`
   position: relative;
@@ -11,12 +10,8 @@ const ImageContent = styled.div`
   grid-column: col-start / span 7;
 `;
 
-const Content = styled.div`
-  position: relative;
-  display: grid;
-  align-items: center;
+const Content = styled(Row)`
   height: 100%;
-  grid-column: col-start 8 / span 3;
 `;
 
 const Image = styled.img`
@@ -28,19 +23,23 @@ const Image = styled.img`
 
 const FormContainer = styled.div`
   display: flex;
+  justify-content: center;
   flex-direction: column;
-  min-height: 400px;
+  height: 100%;
   width: 100%;
+  padding-bottom: 100px;
 `;
 
 const AuthLayout = ({ children }: PropsWithChildren<{}>) => (
-  <Grid>
-    <ImageContent>
-      <Image src="/img/onboarding.svg" />
-    </ImageContent>
-    <Content>
+  <Content>
+    <Col span={14}>
+      <ImageContent>
+        <Image src="/img/onboarding.svg" />
+      </ImageContent>
+    </Col>
+    <Col span={6}>
       <FormContainer>{children}</FormContainer>
-    </Content>
-  </Grid>
+    </Col>
+  </Content>
 );
 export default AuthLayout;

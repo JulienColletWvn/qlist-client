@@ -4,7 +4,7 @@ import createSagaMiddleware from "redux-saga";
 import reducer from "./reducers";
 import mySaga from "./sagas";
 
-import { api } from "../services";
+import { api } from "../services/api";
 
 const sagaMiddleware = createSagaMiddleware();
 

@@ -1,10 +1,10 @@
-import { EventsApp } from "../../../layouts/app/events";
+import { EventApp } from "../../../layouts/app/event";
 
 const Transactions = () => {
   return (
-    <EventsApp>
+    <EventApp>
       <h1>Transactions</h1>
-    </EventsApp>
+    </EventApp>
   );
 };
 

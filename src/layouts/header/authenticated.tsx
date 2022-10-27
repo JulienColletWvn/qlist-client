@@ -1,25 +1,30 @@
-import { redirect } from "react-router-dom";
-import { getRoute } from "../../router/routes";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useLazyLogoutQuery } from "../../services/auth";
 
 import Header, { HeaderNav, HeaderNavItem, HeaderNaviList } from "./header";
 
 export const AuthenticatedHeader = () => {
+  const [trigger, { isSuccess }] = useLazyLogoutQuery();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isSuccess) navigate("/login");
+  }, [isSuccess]);
+
   return (
     <Header>
       <HeaderNav>
         <HeaderNaviList>
-          <HeaderNavItem onClick={() => redirect(getRoute("events"))}>
+          <HeaderNavItem onClick={() => navigate("/events")}>
             Events
-          </HeaderNavItem>
-          <HeaderNavItem onClick={() => redirect(getRoute("guests"))}>
-            Guests
           </HeaderNavItem>
         </HeaderNaviList>
         <HeaderNaviList>
-          <HeaderNavItem onClick={() => redirect(getRoute("user"))}>
+          <HeaderNavItem onClick={() => navigate("/user")}>
             Profile
           </HeaderNavItem>
-          <HeaderNavItem>Logout</HeaderNavItem>
+          <HeaderNavItem onClick={() => trigger()}>Logout</HeaderNavItem>
         </HeaderNaviList>
       </HeaderNav>
     </Header>

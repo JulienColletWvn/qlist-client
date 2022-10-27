@@ -1,15 +1,20 @@
-import { useState } from "react";
-import { redirect } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { TextInput, Button } from "../../components/input";
 import Heading from "../../components/heading";
 import { RegisterApp } from "../../layouts/app";
-import { CreateUserParams, useCreateUserMutation } from "../../services";
+import { CreateUserParams, useCreateUserMutation } from "../../services/user";
 
 const Register = () => {
-  const [addNewPost, { isLoading }] = useCreateUserMutation();
+  const navigate = useNavigate();
+  const [addNewPost, { isSuccess, isError }] = useCreateUserMutation();
   const [formData, setFormData] = useState<
     Record<string, { value: string; isValid: Boolean }>
   >({});
+
+  useEffect(() => {
+    if (isSuccess) navigate("/events");
+  }, [isSuccess]);
 
   return (
     <RegisterApp>
@@ -25,26 +30,31 @@ const Register = () => {
         <TextInput
           key={key}
           name={key}
+          id={key}
+          label={key}
           value={formData[key]?.value ?? ""}
-          setValue={(nextValue) =>
+          onChange={(e) =>
             setFormData((prev) => ({
               ...prev,
-              [key]: { value: nextValue, isValid: true },
+              [key]: { value: e.target.value, isValid: true },
             }))
           }
         />
       ))}
-      <Button
-        onClick={() =>
-          addNewPost(
-            Object.entries(formData).reduce(
-              (acc, [key, { value }]) => ({ ...acc, [key]: value }),
-              {} as CreateUserParams
+      <div>
+        <Button
+          onClick={() =>
+            addNewPost(
+              Object.entries(formData).reduce(
+                (acc, [key, { value }]) => ({ ...acc, [key]: value }),
+                {} as CreateUserParams
+              )
             )
-          )
-        }
-        label="Suivant"
-      />
+          }
+          label="Suivant"
+        />
+      </div>
+      {isError && <p>Something went wrong</p>}
     </RegisterApp>
   );
 };

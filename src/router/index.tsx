@@ -1,10 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
 import Root from "../pages/_root";
-import Index from "../pages";
+
 import Register from "../pages/auth/register";
 import Login from "../pages/auth/login";
 
+import User from "../pages/user";
+
 import Events from "../pages/events";
+import CreateEvent from "../pages/events/create";
+
 import EventsDetails from "../pages/events/[id]/details";
 import EventsGuests from "../pages/events/[id]/guests";
 import EventsTickets from "../pages/events/[id]/tickets";
@@ -48,6 +52,14 @@ export const router = createBrowserRouter([
       {
         path: "events/:id/statistics",
         element: <EventsStatistics />,
+      },
+      {
+        path: "user",
+        element: <User />,
+      },
+      {
+        path: "events/create",
+        element: <CreateEvent />,
       },
       {
         path: "events",

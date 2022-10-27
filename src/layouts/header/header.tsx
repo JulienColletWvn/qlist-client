@@ -22,6 +22,7 @@ export const HeaderNav = styled.nav<{ align?: string }>`
 export const HeaderNaviList = styled.ul`
   display: flex;
   list-style: none;
+  margin: 0;
 `;
 
 export const HeaderNavItem = styled.li`

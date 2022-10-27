@@ -4,8 +4,6 @@ import { RouterProvider } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 import { router } from "./router";
 
-import "./styles/index.css";
-
 const container = document.getElementById("root")!;
 const root = createRoot(container);
 

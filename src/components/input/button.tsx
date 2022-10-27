@@ -1,16 +1,19 @@
 import styled from "styled-components";
 
 const ButtonElement = styled.button`
-  padding: 12px 14px;
+  height: 2.5rem;
+  padding: 0 2rem 0 2rem;
   background-color: ${({ theme }) => theme.colors.green};
   border: none;
-  border-radius: 4px;
+  border-radius: 0.25rem;
   font-family: "Inter", sans-serif;
   font-weight: 600;
   font-size: 12px;
   text-transform: uppercase;
   color: white;
   cursor: pointer;
+  margin: 0;
+  margin-top: 1rem;
 `;
 
 export const Button = ({

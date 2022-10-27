@@ -1,10 +1,10 @@
-import { EventsApp } from "../../../layouts/app/events";
+import { EventApp } from "../../../layouts/app/event";
 
 const Tickets = () => {
   return (
-    <EventsApp>
+    <EventApp>
       <h1>Tickets</h1>
-    </EventsApp>
+    </EventApp>
   );
 };
 
