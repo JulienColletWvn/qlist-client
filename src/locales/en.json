@@ -1,0 +1,63 @@
+{
+  "next": "Next",
+  "previous": "Previous",
+  "validate": "Validate",
+  "login": {
+    "title": "Login"
+  },
+  "register": {
+    "title": "Create account",
+    "form": {
+      "name": {
+        "title": "Account name",
+        "description": "The name of your account will be visible by other members of your event creation team."
+      },
+      "details": {
+        "title": "Account details",
+        "description": "Those fields are not mandatory, but they unlock some features or allow us to send you more personalised content."
+      }
+    }
+  },
+  "header": {
+    "login": "Login",
+    "register": "Register"
+  },
+  "forms": {
+    "fields": {
+      "username": "User name",
+      "email": "Email",
+      "password": "Password",
+      "firstname": "First name",
+      "lastname": "Last name",
+      "phone": "Phone"
+    },
+    "errors": {
+      "minLength": "Minimal length not reached",
+      "maxLength": "Maximal length reached",
+      "invalidEmail": "Invalid E-Mail",
+      "required": "Empty field"
+    }
+  },
+  "errors": {
+    "unknown": "Someting went wrong",
+    "emailAlreadyInUse": "Email address is already in use",
+    "invalidCredentials": "Invalid credentials"
+  },
+  "event": {
+    "sidebar": {
+      "event": "Event",
+      "guests": "Guests",
+      "tickets": "Tickets",
+      "cashiers": "Cashiers",
+      "sellers": "Sellers",
+      "transactions": "Transactions",
+      "statistics": "Statistics"
+    }
+  },
+  "events": {
+    "sidebar": {
+      "events": "My events",
+      "create": "Create Event"
+    }
+  }
+}

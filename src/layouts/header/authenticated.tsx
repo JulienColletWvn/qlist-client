@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLazyLogoutQuery } from "../../services/auth";
+import { LangSelector } from "../../components/langSelector";
 
 import Header, { HeaderNav, HeaderNavItem, HeaderNaviList } from "./header";
 
@@ -25,6 +26,7 @@ export const AuthenticatedHeader = () => {
             Profile
           </HeaderNavItem>
           <HeaderNavItem onClick={() => trigger()}>Logout</HeaderNavItem>
+          <LangSelector />
         </HeaderNaviList>
       </HeaderNav>
     </Header>

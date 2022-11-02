@@ -1,47 +1,63 @@
 import { PropsWithChildren } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { Button } from "../../components/input";
+import styled from "styled-components";
+import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
 import { Layout, Sider, Content } from "../../components/layout";
 import { AuthenticatedPage } from "../page";
+import { SideBar } from "../../components/sidebar";
+
+const StyledSider = styled(Sider)`
+  padding-top: 0.5rem;
+`;
 
 export const EventApp = ({ children }: PropsWithChildren<{}>) => {
-  const navigate = useNavigate();
+  const { t } = useTranslation();
   const { id } = useParams();
-  const eventId = String(id);
 
   return (
     <AuthenticatedPage>
       <Layout>
-        <Sider>
-          <Button
-            label="Event"
-            onClick={() => navigate(`/events/${id}/details`)}
+        <StyledSider>
+          <SideBar
+            links={[
+              {
+                label: t("event.sidebar.event"),
+                link: `/events/${id}/details`,
+                icon: "fa-regular fa-calendar",
+              },
+              {
+                label: t("event.sidebar.guests"),
+                link: `/events/${id}/guests`,
+                icon: "fa-solid fa-users",
+              },
+              {
+                label: t("event.sidebar.tickets"),
+                link: `/events/${id}/tickets`,
+                icon: "fa-solid fa-ticket-simple",
+              },
+              {
+                label: t("event.sidebar.cashiers"),
+                link: `/events/${id}/cashiers`,
+                icon: "fa-solid fa-receipt",
+              },
+              {
+                label: t("event.sidebar.sellers"),
+                link: `/events/${id}/sellers`,
+                icon: "fa-solid fa-shop",
+              },
+              {
+                label: t("event.sidebar.transactions"),
+                link: `/events/${id}/transactions`,
+                icon: "fa-solid fa-right-left",
+              },
+              {
+                label: t("event.sidebar.statistics"),
+                link: `/events/${id}/statistics`,
+                icon: "fa-solid fa-chart-line",
+              },
+            ]}
           />
-          <Button
-            label="Guests"
-            onClick={() => navigate(`/events/${id}/guests`)}
-          />
-          <Button
-            label="Tickets"
-            onClick={() => navigate(`/events/${id}/tickets`)}
-          />
-          <Button
-            label="Cashiers"
-            onClick={() => navigate(`/events/${id}/cashiers`)}
-          />
-          <Button
-            label="Sellers"
-            onClick={() => navigate(`/events/${id}/sellers`)}
-          />
-          <Button
-            label="Transactions"
-            onClick={() => navigate(`/events/${id}/transactions`)}
-          />
-          <Button
-            label="Statistics"
-            onClick={() => navigate(`/events/${id}/statistics`)}
-          />
-        </Sider>
+        </StyledSider>
         <Content>{children}</Content>
       </Layout>
     </AuthenticatedPage>

@@ -4,6 +4,7 @@ import { Row, Col } from "../../layouts";
 
 const ImageContent = styled.div`
   position: relative;
+  overflow: hidden;
   display: grid;
   align-items: center;
   height: 100%;
@@ -11,13 +12,12 @@ const ImageContent = styled.div`
 `;
 
 const Content = styled(Row)`
-  height: 100%;
+  flex: 1 1 auto;
 `;
 
 const Image = styled.img`
   position: absolute;
   right: 0;
-  top: -10%;
   max-height: 110%;
 `;
 

@@ -1,0 +1,63 @@
+{
+  "next": "Suivant",
+  "previous": "Précédent",
+  "validate": "Valider",
+  "login": {
+    "title": "Se connecter"
+  },
+  "register": {
+    "title": "Créer un compte",
+    "form": {
+      "name": {
+        "title": "Nom du compte",
+        "description": "Le nom du compte sera visible par les autres membres de l'équipe d'organisation de vos événements."
+      },
+      "details": {
+        "title": "Détails du compte",
+        "description": "Ces champs ne sont pas obligatoires, mais ils permettent de personnaliser vos expériences."
+      }
+    }
+  },
+  "header": {
+    "login": "Se connecter",
+    "register": "Créer un compte"
+  },
+  "forms": {
+    "fields": {
+      "username": "Nom d'utilisateur",
+      "email": "E-Mail",
+      "password": "Mot de passe",
+      "firstname": "Prénom",
+      "lastname": "Nom",
+      "phone": "Numéro de téléphone"
+    },
+    "errors": {
+      "minLength": "Taille minimale insufissante",
+      "maxLength": "Taille maximale atteinte",
+      "invalidEmail": "Adresse E-mail invalide",
+      "required": "Champ requis"
+    }
+  },
+  "errors": {
+    "unknown": "Une erreur s'est produite",
+    "emailAlreadyInUse": "Cette adresse est déjà utilisée",
+    "invalidCredentials": "Login invalide"
+  },
+  "event": {
+    "sidebar": {
+      "event": "Evenement",
+      "guests": "Invités",
+      "tickets": "Tickets",
+      "cashiers": "Guichetiers",
+      "sellers": "Revendeurs",
+      "transactions": "Transactions",
+      "statistics": "Statistiques"
+    }
+  },
+  "events": {
+    "sidebar": {
+      "events": "My events",
+      "create": "Create Event"
+    }
+  }
+}
