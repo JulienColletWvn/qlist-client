@@ -13,7 +13,9 @@ export const LoginHeader = () => {
           <HeaderNavItem onClick={() => navigate("/register")}>
             {t("header.register")}
           </HeaderNavItem>
-          <LangSelector />
+          <HeaderNavItem>
+            <LangSelector />
+          </HeaderNavItem>
         </HeaderNaviList>
       </HeaderNav>
     </Header>

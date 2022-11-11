@@ -1,5 +1,6 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useLazyLogoutQuery } from "../../services/auth";
 import { LangSelector } from "../../components/langSelector";
 
@@ -8,25 +9,43 @@ import Header, { HeaderNav, HeaderNavItem, HeaderNaviList } from "./header";
 export const AuthenticatedHeader = () => {
   const [trigger, { isSuccess }] = useLazyLogoutQuery();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const { t } = useTranslation();
 
   useEffect(() => {
-    if (isSuccess) navigate("/login");
+    if (isSuccess) navigate("/");
   }, [isSuccess]);
 
   return (
     <Header>
       <HeaderNav>
         <HeaderNaviList>
-          <HeaderNavItem onClick={() => navigate("/events")}>
-            Events
+          <HeaderNavItem
+            onClick={() => navigate("/events")}
+            active={/\/events/.test(pathname)}
+          >
+            {t("header.events")}
+          </HeaderNavItem>
+          <HeaderNavItem
+            onClick={() => navigate("/contacts")}
+            active={/\/contacts/.test(pathname)}
+          >
+            {t("header.contacts")}
           </HeaderNavItem>
         </HeaderNaviList>
         <HeaderNaviList>
-          <HeaderNavItem onClick={() => navigate("/user")}>
-            Profile
+          <HeaderNavItem
+            onClick={() => navigate("/user")}
+            active={/\/user/.test(pathname)}
+          >
+            {t("header.profile")}
           </HeaderNavItem>
-          <HeaderNavItem onClick={() => trigger()}>Logout</HeaderNavItem>
-          <LangSelector />
+          <HeaderNavItem onClick={() => trigger()}>
+            {t("header.logout")}
+          </HeaderNavItem>
+          <HeaderNavItem>
+            <LangSelector />
+          </HeaderNavItem>
         </HeaderNaviList>
       </HeaderNav>
     </Header>

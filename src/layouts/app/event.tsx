@@ -10,7 +10,10 @@ const StyledSider = styled(Sider)`
   padding-top: 0.5rem;
 `;
 
-export const EventApp = ({ children }: PropsWithChildren<{}>) => {
+export const EventApp = ({
+  children,
+  isLoading,
+}: PropsWithChildren<{ isLoading?: boolean }>) => {
   const { t } = useTranslation();
   const { id } = useParams();
 
@@ -58,7 +61,7 @@ export const EventApp = ({ children }: PropsWithChildren<{}>) => {
             ]}
           />
         </StyledSider>
-        <Content>{children}</Content>
+        <Content>{isLoading ? <h3>Loading...</h3> : children}</Content>
       </Layout>
     </AuthenticatedPage>
   );

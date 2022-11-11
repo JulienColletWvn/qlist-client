@@ -1,10 +1,26 @@
-import { DatePicker, DatePickerProps } from "antd";
+import { DatePicker } from "antd";
+import styled from "styled-components";
 import { RangePickerProps } from "antd/es/date-picker";
 import { Label } from "./label";
+import { Error } from "./error";
 
-export const RangePicker = (props: { label?: string } & RangePickerProps) => (
-  <>
+const StyledContainer = styled.div`
+  margin-bottom: 12px;
+`;
+
+const StyledRangerPicker = styled(DatePicker.RangePicker)`
+  width: 100%;
+`;
+
+export const RangePicker = (
+  props: { label?: string; errors?: string[] } & RangePickerProps
+) => (
+  <StyledContainer>
     {props.label && props.id && <Label name={props.id} label={props.label} />}
-    <DatePicker.RangePicker {...props} />
-  </>
+    <StyledRangerPicker {...props} />
+    {props.errors &&
+      props.errors.map((error, i, a) => (
+        <Error>{`${error}${i < a.length - 1 ? ", " : ""}`}</Error>
+      ))}
+  </StyledContainer>
 );

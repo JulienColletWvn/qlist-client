@@ -5,6 +5,7 @@ import Register from "../pages/auth/register";
 import Login from "../pages/auth/login";
 
 import User from "../pages/user";
+import Preferences from "../pages/user/preferences";
 
 import Events from "../pages/events";
 import CreateEvent from "../pages/events/create";
@@ -17,6 +18,9 @@ import EventsSellers from "../pages/events/[id]/sellers";
 import EventsTransactions from "../pages/events/[id]/transactions";
 import EventsStatistics from "../pages/events/[id]/statistics";
 
+import Contacts from "../pages/contacts";
+import AddContact from "../pages/contacts/add";
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -24,7 +28,6 @@ export const router = createBrowserRouter([
     errorElement: <h1>Error</h1>,
     children: [
       { path: "register", element: <Register /> },
-      { path: "login", element: <Login /> },
       {
         path: "events/:id/details",
         element: <EventsDetails />,
@@ -54,6 +57,10 @@ export const router = createBrowserRouter([
         element: <EventsStatistics />,
       },
       {
+        path: "user/preferences",
+        element: <Preferences />,
+      },
+      {
         path: "user",
         element: <User />,
       },
@@ -65,6 +72,15 @@ export const router = createBrowserRouter([
         path: "events",
         element: <Events />,
       },
+      {
+        path: "contacts",
+        element: <Contacts />,
+      },
+      {
+        path: "contacts/add",
+        element: <AddContact />,
+      },
+      { path: "", element: <Login /> },
     ],
   },
 ]);

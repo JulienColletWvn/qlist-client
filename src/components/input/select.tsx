@@ -16,7 +16,9 @@ export const Select = ({
 } & SelectProps) => (
   <StyledSelect {...props}>
     {options.map(({ value, label }) => (
-      <StyledOption value={value}>{label}</StyledOption>
+      <StyledOption value={value} key={value}>
+        {label}
+      </StyledOption>
     ))}
   </StyledSelect>
 );

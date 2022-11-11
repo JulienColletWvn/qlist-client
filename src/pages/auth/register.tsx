@@ -7,9 +7,21 @@ import { TextInput, Button } from "../../components/input";
 import Heading from "../../components/heading";
 import { RegisterApp } from "../../layouts/app";
 import { CreateUserParams, useCreateUserMutation } from "../../services/user";
-import { getInputErrors, ValidationOptions } from "../../utils/form";
+import { getInputErrors, ValidationOptions, FormInput } from "../../utils/form";
 import { Check } from "../../components/icons";
 import { useToast } from "../../components/toast";
+
+export type InputName =
+  | "username"
+  | "email"
+  | "firstname"
+  | "lastname"
+  | "phone"
+  | "password";
+
+const StyledSubmitContainer = styled.div`
+  padding-top: 0.75rem;
+`;
 
 const StyledCheckContainer = styled.div<{ visible: boolean }>`
   display: flex;
@@ -18,7 +30,7 @@ const StyledCheckContainer = styled.div<{ visible: boolean }>`
   transition: 0.2s;
 `;
 
-export const loginInputs: FormInput[] = [
+export const loginInputs: FormInput<InputName>[] = [
   {
     id: "email",
     label: "forms.fields.email",
@@ -26,6 +38,7 @@ export const loginInputs: FormInput[] = [
       isEmail: true,
       required: true,
     },
+    transform: (nextValue) => nextValue.toLowerCase(),
   },
   {
     id: "password",
@@ -38,7 +51,7 @@ export const loginInputs: FormInput[] = [
   },
 ];
 
-const accountForm: FormInput[] = [
+const accountForm: FormInput<InputName>[] = [
   {
     id: "username",
     validationRules: {
@@ -49,7 +62,7 @@ const accountForm: FormInput[] = [
   ...loginInputs,
 ];
 
-const detailsForm: FormInput[] = [
+const detailsForm: FormInput<InputName>[] = [
   {
     id: "firstname",
     label: "forms.fields.firstname",
@@ -74,20 +87,6 @@ type BackendError = {
 };
 
 type Step = 1 | 2;
-export type InputName =
-  | "username"
-  | "email"
-  | "firstname"
-  | "lastname"
-  | "phone"
-  | "password";
-
-type FormInput = {
-  id: InputName;
-  label?: string;
-  type?: string;
-  validationRules?: ValidationOptions;
-};
 
 const Register = () => {
   const { t } = useTranslation();
@@ -160,17 +159,24 @@ const Register = () => {
     if (isSuccess) navigate("/events");
   }, [isSuccess]);
 
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement>,
-    key: InputName,
-    validationOptions?: ValidationOptions
-  ) => {
-    setFormData((prev) => ({ ...prev, [key]: e.target.value }));
+  const handleChange = ({
+    e,
+    key,
+    validationOptions,
+    transform,
+  }: {
+    e: ChangeEvent<HTMLInputElement>;
+    key: InputName;
+    validationOptions?: ValidationOptions;
+    transform?(nextValue: string): string;
+  }) => {
+    const value = transform ? transform(e.target.value) : e.target.value;
+    setFormData((prev) => ({ ...prev, [key]: value }));
     if (validationOptions)
       setFormsErrors((prev) => ({
         ...prev,
         [key]: getInputErrors({
-          value: e.target.value,
+          value,
           ...validationOptions,
         }).map((e) => "forms.errors." + e),
       }));
@@ -181,14 +187,21 @@ const Register = () => {
       <>
         <h3>{t("register.form.name.title")}</h3>
         <p>{t("register.form.name.description")}</p>
-        {accountForm.map(({ id, label, validationRules, type }) => (
+        {accountForm.map(({ id, label, validationRules, type, transform }) => (
           <TextInput
             key={id}
             id={id}
             label={label && t(label)}
             type={type}
             value={formData[id] ?? ""}
-            onChange={(e) => handleChange(e, id, validationRules)}
+            onChange={(e) =>
+              handleChange({
+                e,
+                key: id,
+                validationOptions: validationRules,
+                transform,
+              })
+            }
             errors={showErrors ? formsErrors[id]?.map((e) => t(e)) : []}
             suffix={
               <StyledCheckContainer
@@ -203,7 +216,7 @@ const Register = () => {
             }
           />
         ))}
-        <div>
+        <StyledSubmitContainer>
           <Button
             onClick={() => {
               if (
@@ -217,21 +230,28 @@ const Register = () => {
             }}
             label={t("next")}
           />
-        </div>
+        </StyledSubmitContainer>
       </>
     ),
     2: (
       <>
         <h3>{t("register.form.details.title")}</h3>
         <p>{t("register.form.details.description")}</p>
-        {detailsForm.map(({ id, label, validationRules, type }) => (
+        {detailsForm.map(({ id, label, validationRules, type, transform }) => (
           <TextInput
             key={id}
             id={id}
             label={label && t(label)}
             type={type}
             value={formData[id] ?? ""}
-            onChange={(e) => handleChange(e, id, validationRules)}
+            onChange={(e) =>
+              handleChange({
+                e,
+                key: id,
+                validationOptions: validationRules,
+                transform,
+              })
+            }
             errors={showErrors ? formsErrors[id]?.map((e) => t(e)) : []}
             suffix={
               <StyledCheckContainer
@@ -246,7 +266,7 @@ const Register = () => {
             }
           />
         ))}
-        <div>
+        <StyledSubmitContainer>
           <Button
             onClick={() => setStep(1)}
             label={t("previous")}
@@ -263,7 +283,7 @@ const Register = () => {
             }
             label={t("validate")}
           />
-        </div>
+        </StyledSubmitContainer>
       </>
     ),
   };

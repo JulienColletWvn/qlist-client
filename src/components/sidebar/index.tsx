@@ -68,6 +68,7 @@ export const SideBar = ({ links }: SideBarProps) => {
     <StyledList>
       {links.map(({ label, link, icon }) => (
         <StyledLink
+          key={label}
           selected={link.replace(":id", id ?? "") === pathname}
           onClick={() => navigate(link)}
         >

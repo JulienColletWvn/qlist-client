@@ -8,4 +8,5 @@ export const api = createApi({
     credentials: "include",
   }),
   endpoints: (builder) => ({}),
+  tagTypes: ["Events", "Contacts"],
 });

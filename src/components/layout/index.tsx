@@ -2,16 +2,26 @@ import { Layout as BaseLayout } from "antd";
 import styled from "styled-components";
 
 export { Col, Row } from "antd";
-export const Layout = styled(BaseLayout)`
-  flex: 1;
-  margin-left: 2rem;
-  margin-right: 2rem;
-`;
-export const Sider = styled(BaseLayout.Sider)`
-  margin-right: 2rem;
-`;
-export const Content = styled(BaseLayout.Content)`
+
+export const Layout = styled.div`
+  display: flex;
+  flex-direction: row;
   overflow: auto;
 `;
+
+export const Sider = styled.aside`
+  width: 250px;
+  flex: 0 0 250px;
+  margin-right: 2rem;
+  padding-left: 1.5rem;
+`;
+
+export const Content = styled(BaseLayout.Content)`
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: 3.5rem;
+  padding-right: 3.5rem;
+`;
+
 export const Header = styled(BaseLayout.Header)``;
 export const Footer = styled(BaseLayout.Footer)``;

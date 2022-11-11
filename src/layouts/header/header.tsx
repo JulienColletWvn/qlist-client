@@ -28,12 +28,23 @@ export const HeaderNaviList = styled.ul`
   margin: 0;
 `;
 
-export const HeaderNavItem = styled.li`
-  margin-left: 1rem;
-  margin-right: 1rem;
+export const HeaderNavItem = styled.li<{ active?: boolean }>`
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
   cursor: pointer;
   font-size: 14px;
-  color: ${({ theme }) => theme.colors.darkGrey};
+  color: ${({ theme }) => theme.colors.solidGrey};
+  transition: 0.2s;
+
+  &:hover {
+    color: ${({ theme }) => theme.accent};
+  }
+
+  ${({ active, theme }) => (active ? `color: ${theme.accent};` : "")}
+
+  &:last-child {
+    margin-right: 0;
+  }
 `;
 
 const HeaderComponent = ({ children }: PropsWithChildren<{}>) => (

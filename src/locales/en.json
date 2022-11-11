@@ -1,4 +1,9 @@
 {
+  "languages": {
+    "fr": "French",
+    "en": "English",
+    "nl": "Dutch"
+  },
   "next": "Next",
   "previous": "Previous",
   "validate": "Validate",
@@ -20,7 +25,11 @@
   },
   "header": {
     "login": "Login",
-    "register": "Register"
+    "register": "Register",
+    "profile": "Profile",
+    "events": "Events",
+    "contacts": "Contacts",
+    "logout": "Logout"
   },
   "forms": {
     "fields": {
@@ -35,6 +44,7 @@
       "minLength": "Minimal length not reached",
       "maxLength": "Maximal length reached",
       "invalidEmail": "Invalid E-Mail",
+      "invalidPhoneNumber": "Invalid Phone Number",
       "required": "Empty field"
     }
   },
@@ -52,12 +62,137 @@
       "sellers": "Sellers",
       "transactions": "Transactions",
       "statistics": "Statistics"
+    },
+    "details": {
+      "title": "Details"
+    },
+    "guests": {
+      "title": "Guests"
+    },
+    "tickets": {
+      "title": "Tickets"
+    },
+    "cashiers": {
+      "title": "Cashiers"
+    },
+    "sellers": {
+      "title": "Sellers"
+    },
+    "transactions": {
+      "title": "Transactions"
+    },
+    "statistics": {
+      "title": "Statistics"
+    }
+  },
+  "user": {
+    "sidebar": {
+      "profile": "Profile",
+      "preferences": "Preferences"
+    }
+  },
+  "contacts": {
+    "list": {
+      "title": "Contacts"
+    },
+    "sidebar": {
+      "contacts": "My contacts",
+      "add": "Add contact"
+    },
+    "create": {
+      "fields": {
+        "firstname": {
+          "title": "Firstname",
+          "placeholder": "Steve"
+        },
+        "lastname": {
+          "title": "Lastname",
+          "placeholder": "Jobs"
+        },
+        "email": {
+          "title": "Email",
+          "placeholder": "steve.jobs@apple.com"
+        },
+        "phone": {
+          "title": "Phone",
+          "placeholder": "0032432323232"
+        }
+      },
+      "submit": "Submit"
     }
   },
   "events": {
+    "list": {
+      "title": "My events"
+    },
     "sidebar": {
       "events": "My events",
       "create": "Create Event"
+    },
+    "create": {
+      "title": "New event",
+      "submit": {
+        "title": "Create event",
+        "description": "Once created, you will be able to add guests, tickets, cachiers, etc...",
+        "button": "Got it !"
+      },
+      "fields": {
+        "name": {
+          "title": "Event name",
+          "placeholder": "\"New Year Party\", \"Open House Day\", \"Beer Festival\",..."
+        },
+        "description": {
+          "title": "Description",
+          "placeholder": "\"Annual corporate party for employees from Brussels's offices\",..."
+        },
+        "contents": {
+          "title": "Event contents",
+          "tip": {
+            "title": "About languages",
+            "description": "Fill in the contents in the languages you want your event to be displayed in."
+          },
+          "errors": {
+            "incompleteLanguage": "{{lang}} is missing some content",
+            "missingContent": "You must define content in at least one language"
+          }
+        },
+        "dates": {
+          "title": "Event dates",
+          "description": "When is your event starting and ending ?"
+        },
+        "images": {
+          "title": "Images"
+        },
+        "location": {
+          "title": "Event location",
+          "description": "Where is your event taking place ?",
+          "placeholder": "\"On Brussels's offices rooftop\",..."
+        },
+        "capacity": {
+          "title": "Event capacity",
+          "description": "Select how many tickets can be distributed",
+          "placeholder": "500"
+        },
+        "details": {
+          "wifi": {
+            "title": "Free wifi"
+          },
+          "public": {
+            "title": "Public",
+            "description": "A public event will be discoverable by other users."
+          },
+          "parking": {
+            "title": "Free parking"
+          },
+          "disabilityFriendly": {
+            "title": "Disability friendly"
+          },
+          "tip": {
+            "title": "About public events",
+            "description": "Public events can be discoverbale by every user."
+          }
+        }
+      }
     }
   }
 }

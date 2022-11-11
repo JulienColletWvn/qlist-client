@@ -1,27 +1,74 @@
 import { api } from "./api";
 
-export const extendedApiSlice = api.injectEndpoints({
+export type EventContent = {
+  lang: string;
+  content: string | number | boolean;
+  type: "name" | "description";
+};
+
+export type CreateEventParams = {
+  content: EventContent[];
+  start_date: string;
+  end_date: string;
+  location: string;
+  free_wifi: boolean;
+  public: boolean;
+  tickets_amount: number;
+  status: string;
+};
+
+export type Event = CreateEventParams & {
+  ID: number;
+  CreatedAt: string;
+  UpdatedAt: string;
+};
+
+export type EventDetails = Event & {
+  guests: {}[];
+  images: {}[];
+  cashiers: {}[];
+  products: {}[];
+  sellers: {}[];
+  tickets: {}[];
+  wallets: {}[];
+};
+
+const extendedApiSlice = api.injectEndpoints({
   endpoints: (builder) => ({
-    getUsers: builder.query({
-      query: () => "/users",
+    getEvents: builder.query<Event[], void>({
+      query: () => "/user/events",
+      providesTags: ["Events"],
+    }),
+    getEvent: builder.query<EventDetails, string>({
+      query: (eventId: string) => `/user/events/${eventId}`,
+      providesTags: ["Events"],
+    }),
+    createEvent: builder.mutation({
+      query: (body: CreateEventParams) => {
+        return {
+          url: "/user/events",
+          method: "POST",
+          body,
+        };
+      },
+      invalidatesTags: ["Events"],
+    }),
+    createGuest: builder.mutation({
+      query: (body: { eventId: number; contactId: number }) => {
+        return {
+          url: `/user/events/${body.eventId}/guests`,
+          method: "POST",
+          body: { contactId: body.contactId },
+        };
+      },
+      invalidatesTags: ["Events"],
     }),
   }),
 });
 
-export const { useGetUsersQuery } = extendedApiSlice;
-
-/**
- * 
- * Content       []LocalisedTextContent `json:"name" gorm:"polymorphic:Content" validate:"required"`
-StartDate     *time.Time             `json:"start_date" gorm:"not null" validate:"required"`
-EndDate       *time.Time             `json:"end_date" gorm:"not null" validate:"required"`
-Location      string                 `json:"location" gorm:"not null" validate:"required"`
-FreeWifi      bool                   `json:"free_wifi"`
-Public        bool                   `json:"public" gorm:"not null"`
-TicketsAmount int                    `json:"tickets_amount"`
-Status        string                 `json:"status"`
-
-
- * 
- * 
- */
+export const {
+  useGetEventsQuery,
+  useCreateEventMutation,
+  useGetEventQuery,
+  useCreateGuestMutation,
+} = extendedApiSlice;

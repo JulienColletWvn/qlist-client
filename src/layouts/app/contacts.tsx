@@ -1,17 +1,20 @@
 import { PropsWithChildren } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
-import { Button } from "../../components/input";
-import { AuthenticatedPage } from "../page";
 import { Layout, Sider, Content } from "../../components/layout";
+import { AuthenticatedPage } from "../page";
 import { SideBar } from "../../components/sidebar";
 
 const StyledSider = styled(Sider)`
   padding-top: 0.5rem;
 `;
 
-export const UserApp = ({ children }: PropsWithChildren<{}>) => {
+export const ContactsApp = ({
+  children,
+  isLoading,
+}: PropsWithChildren<{ isLoading?: boolean }>) => {
   const { t } = useTranslation();
+
   return (
     <AuthenticatedPage>
       <Layout>
@@ -19,19 +22,19 @@ export const UserApp = ({ children }: PropsWithChildren<{}>) => {
           <SideBar
             links={[
               {
-                label: t("user.sidebar.profile"),
-                link: `/user`,
-                icon: "fa-solid fa-calendar-plus",
+                label: t("contacts.sidebar.add"),
+                link: `/contacts/add`,
+                icon: "fa-solid fa-user-plus",
               },
               {
-                label: t("user.sidebar.preferences"),
-                link: `/user/preferences`,
-                icon: "fa-regular fa-calendar",
+                label: t("contacts.sidebar.contacts"),
+                link: `/contacts`,
+                icon: "fa-regular fa-user-group",
               },
             ]}
           />
         </StyledSider>
-        <Content>{children}</Content>
+        <Content>{isLoading ? <h3>Loading...</h3> : children}</Content>
       </Layout>
     </AuthenticatedPage>
   );

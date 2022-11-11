@@ -10,10 +10,12 @@ export const RegisterHeader = () => {
     <Header>
       <HeaderNav align="flex-end">
         <HeaderNaviList>
-          <HeaderNavItem onClick={() => navigate("/login")}>
+          <HeaderNavItem onClick={() => navigate("/")}>
             {t("header.login")}
           </HeaderNavItem>
-          <LangSelector />
+          <HeaderNavItem>
+            <LangSelector />
+          </HeaderNavItem>
         </HeaderNaviList>
       </HeaderNav>
     </Header>

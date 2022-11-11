@@ -1,11 +1,11 @@
 import { UserApp } from "../../layouts/app";
 
-const User = () => {
+const Preferences = () => {
   return (
     <UserApp>
-      <h1>Profile</h1>
+      <h1>Preferences</h1>
     </UserApp>
   );
 };
 
-export default User;
+export default Preferences;

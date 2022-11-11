@@ -54,10 +54,63 @@
       "statistics": "Statistiques"
     }
   },
+  "user": {
+    "sidebar": {
+      "profile": "Profile",
+      "preferences": "Préférences"
+    }
+  },
   "events": {
     "sidebar": {
-      "events": "My events",
-      "create": "Create Event"
+      "events": "Mes événements",
+      "create": "Créer un événemet"
+    },
+    "create": {
+      "title": "Nouvel événement",
+      "submit": {
+        "button": "Créer l'événement",
+        "description": "Une fois l'événement créé, vous pourrez ajouter des invités, des tickets, des guichetiers, etc..."
+      },
+      "fields": {
+        "lang": {
+          "title": "Langues supportées",
+          "description": "Choisissez les langues dans lesquelles votre événement pourra être affiché."
+        },
+        "name": {
+          "title": "Nom de l'événement"
+        },
+        "contents": {
+          "title": "Informations",
+          "description": ""
+        },
+        "description": {
+          "title": "Description de l'événement"
+        },
+        "dates": {
+          "title": "Dates",
+          "description": "Quand votre événement se déroulera-t-il ?"
+        },
+        "images": {
+          "title": "Illustrations"
+        },
+        "location": {
+          "title": "Lieu",
+          "description": "Où votre événement aura-t-il lieu ?"
+        },
+        "capacity": {
+          "title": "Capacité",
+          "description": "Combien de tickets d'entrée pourront être distribués ?"
+        },
+        "details": {
+          "wifi": {
+            "title": "Wifi gratuit"
+          },
+          "public": {
+            "title": "Public",
+            "description": "Un événement public peut être trouvé par les autres utilisateurs."
+          }
+        }
+      }
     }
   }
 }
