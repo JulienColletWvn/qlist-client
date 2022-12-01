@@ -4,7 +4,7 @@ import { RegisterHeader } from "../header";
 import AuthLayout from "../onboarding/index";
 
 export const RegisterApp = ({ children }: PropsWithChildren<{}>) => (
-  <Page header={<RegisterHeader />}>
-    <AuthLayout>{children}</AuthLayout>
+  <Page>
+    <AuthLayout header={<RegisterHeader />}>{children}</AuthLayout>
   </Page>
 );

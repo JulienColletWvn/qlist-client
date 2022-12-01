@@ -17,12 +17,12 @@ export const Sider = styled.aside`
   padding-left: 1.5rem;
 `;
 
-export const Content = styled(BaseLayout.Content)`
+export const Content = styled.main`
+  flex: 1;
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
-  padding-bottom: 3.5rem;
-  padding-right: 3.5rem;
+  padding: 1.5rem 3rem 3rem 3rem;
 `;
 
 export const Header = styled(BaseLayout.Header)``;

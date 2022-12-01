@@ -5,9 +5,9 @@ import Authenticated from "../components/authenticated";
 const PageComponent = ({
   children,
   header,
-}: PropsWithChildren<{ header: JSX.Element }>) => (
+}: PropsWithChildren<{ header?: JSX.Element }>) => (
   <>
-    {header}
+    {header && header}
     {children}
   </>
 );

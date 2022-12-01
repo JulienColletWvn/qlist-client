@@ -17,25 +17,31 @@ const StyledContainer = styled.div`
 
 export const StyledInput = styled(Input)`
   border-radius: 4px;
+  height: 2.5rem;
+  margin-bottom: 0.25rem;
 `;
 
 export const StyledTextArea = styled(Input.TextArea)`
   border-radius: 4px;
 `;
 
-export const TextInput = (
-  props: InputProps & {
-    label?: string;
-    errors?: string[];
-    showErrors?: boolean;
-  }
-) => (
+export const TextInput = ({
+  id,
+  label,
+  showErrors,
+  errors,
+  ...props
+}: InputProps & {
+  label?: string;
+  errors?: string[];
+  showErrors?: boolean;
+}) => (
   <StyledContainer>
-    {props.label && props.id && <Label name={props.id} label={props.label} />}
+    {label && id && <Label name={id} label={label} />}
     <StyledInput {...props} />
-    {props.errors &&
-      props.showErrors &&
-      props.errors.map((error, i, a) => (
+    {errors &&
+      showErrors &&
+      errors.map((error, i, a) => (
         <Error>{`${error}${i < a.length - 1 ? ", " : ""}`}</Error>
       ))}
   </StyledContainer>

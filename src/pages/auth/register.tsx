@@ -172,7 +172,7 @@ const Register = () => {
   const steps: Record<Step, JSX.Element> = {
     1: (
       <>
-        <h3>{t("register.form.name.title")}</h3>
+        <Heading level={3}>{t("register.form.name.title")}</Heading>
         <p>{t("register.form.name.description")}</p>
         {accountForm.map((input) => {
           const { id, label } = input;
@@ -213,7 +213,7 @@ const Register = () => {
     ),
     2: (
       <>
-        <h3>{t("register.form.details.title")}</h3>
+        <Heading level={3}>{t("register.form.details.title")}</Heading>
         <p>{t("register.form.details.description")}</p>
         {detailsForm.map((input) => {
           const { id, label } = input;

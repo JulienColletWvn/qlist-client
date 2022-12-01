@@ -24,6 +24,20 @@ const Login = () => {
   const { t } = useTranslation();
   const { addToast } = useToast();
   const [trigger, { isSuccess, isError, isLoading }] = useLazyLoginQuery();
+
+  useEffect(() => {
+    fetch("http://localhost:3001/api/auth/login", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: "ju.collet@gmail.com",
+        password: "trdsb6qm",
+      }),
+    });
+  }, []);
+
   const {
     getValue,
     handleChange,
@@ -35,7 +49,7 @@ const Login = () => {
   } = useForm<InputName>({ inputs: loginInputs });
 
   useEffect(() => {
-    if (isSuccess) navigate("/events");
+    if (isSuccess) navigate("/contacts");
   }, [isSuccess]);
 
   useEffect(() => {

@@ -19,22 +19,6 @@ export const ContactsApp = ({
   return (
     <AuthenticatedPage>
       <Layout>
-        <StyledSider>
-          <SideBar
-            links={[
-              {
-                label: t("contacts.sidebar.add"),
-                link: `/contacts/add`,
-                icon: "fa-solid fa-user-plus",
-              },
-              {
-                label: t("contacts.sidebar.contacts"),
-                link: `/contacts`,
-                icon: "fa-regular fa-user-group",
-              },
-            ]}
-          />
-        </StyledSider>
         <Content>{children}</Content>
       </Layout>
       {isLoading && <PageLoader isLoading={!!isLoading} />}

@@ -5,9 +5,27 @@ const Container = styled.div`
   margin-bottom: 2rem;
 `;
 
-const Heading = styled.h1`
+const H1 = styled.h1`
+  display: inline-block;
+  font-weight: 600;
+  font-size: 2rem;
+  color: ${({ theme }) => theme.colors.fontGrey};
+  margin: 0;
+`;
+
+const H2 = styled.h2`
   display: inline-block;
   font-weight: 800;
+  font-size: 2rem;
+  color: ${({ theme }) => theme.colors.fontGrey};
+  margin: 0;
+`;
+
+const H3 = styled.h3`
+  display: inline-block;
+  font-weight: 600;
+  font-size: 1rem;
+  color: ${({ theme }) => theme.colors.fontGrey};
   margin: 0;
 `;
 
@@ -20,10 +38,14 @@ const Block = styled.div`
   background-color: ${({ theme }) => theme.accent};
 `;
 
-export default function HeadingComponent({ children }: PropsWithChildren<{}>) {
+export default function HeadingComponent({
+  children,
+  level = 1,
+}: PropsWithChildren<{ level?: 1 | 2 | 3 }>) {
+  if (level === 3) return <H3>{children}</H3>;
   return (
     <Container>
-      <Heading>{children}</Heading>
+      <H1>{children}</H1>
       <Block />
     </Container>
   );

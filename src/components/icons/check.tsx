@@ -10,7 +10,7 @@ export const Check = () => (
       fillRule="evenodd"
       clipRule="evenodd"
       d="M18.5263 1.45221L6.21416 16L0 9.57529L1.50829 8.01589L6.11026 12.7738L16.921 0L18.5263 1.45221Z"
-      fill="#6FCF97"
+      fill="#84CDBC"
     />
   </svg>
 );

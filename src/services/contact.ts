@@ -5,7 +5,8 @@ export type Contact = {
   firstname: string;
   lastname: string;
   phone: string;
-};
+  lang: string;
+}[];
 
 const extendedApiSlice = api.injectEndpoints({
   endpoints: (builder) => ({
@@ -13,7 +14,7 @@ const extendedApiSlice = api.injectEndpoints({
       query: () => "/user/contacts",
       providesTags: ["Contacts"],
     }),
-    createContact: builder.mutation({
+    createContacts: builder.mutation({
       query: (body: Contact) => {
         return {
           url: "/user/contacts",
@@ -26,5 +27,5 @@ const extendedApiSlice = api.injectEndpoints({
   }),
 });
 
-export const { useGetContactsQuery, useCreateContactMutation } =
+export const { useGetContactsQuery, useCreateContactsMutation } =
   extendedApiSlice;

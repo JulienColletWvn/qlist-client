@@ -11,7 +11,7 @@ import {
 import { ContactsApp } from "../../layouts/app/contacts";
 import Heading from "../../components/heading";
 import { FormInput } from "../../utils/form";
-import { Contact, useCreateContactMutation } from "../../services";
+import { Contact, useCreateContactsMutation } from "../../services";
 import { Check } from "../../components/icons";
 import { useForm } from "../../components/form/useForm";
 
@@ -58,8 +58,8 @@ export const inputs: FormInput<InputName>[] = [
 const AddContact = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [addContact, { isLoading, isSuccess, isError }] =
-    useCreateContactMutation();
+  const [addContacts, { isLoading, isSuccess, isError }] =
+    useCreateContactsMutation();
   const {
     getValue,
     handleChange,
@@ -137,7 +137,7 @@ const AddContact = () => {
             label={t("contacts.create.submit")}
             onClick={() => {
               if (hasErrors) return setShowErrors();
-              addContact(formData as Contact);
+              addContacts([{ ...formData, lang: "en" }]);
             }}
           />
         </StyledSubmitContainer>

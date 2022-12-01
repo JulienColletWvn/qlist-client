@@ -15,7 +15,6 @@ const extendedApiSlice = api.injectEndpoints({
         url: "/auth/login",
         method: "POST",
         body,
-        responseHandler: "text",
       }),
     }),
   }),

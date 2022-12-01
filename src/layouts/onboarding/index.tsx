@@ -1,14 +1,32 @@
 import { PropsWithChildren } from "react";
 import styled from "styled-components";
 import { Row, Col } from "../../layouts";
+import { DynamicAccentLogo } from "../../components/logo";
+
+const StyledCol = styled(Col)`
+  flex-direction: column;
+  flex: 1;
+  display: flex;
+  padding: 2rem;
+  &:nth-of-type(2) {
+    padding-left: 0;
+  }
+`;
+
+const HeaderContainer = styled.div`
+  padding: 2rem;
+`;
+
+const StyledRow = styled(Row)`
+  flex: 1;
+`;
 
 const ImageContent = styled.div`
-  position: relative;
-  overflow: hidden;
-  display: grid;
-  align-items: center;
-  height: 100%;
-  grid-column: col-start / span 7;
+  flex: 1;
+  padding: 2rem;
+  background-image: url("/img/onboarding.svg");
+  background-size: cover;
+  border-radius: 1rem;
 `;
 
 const Content = styled(Row)`
@@ -30,16 +48,24 @@ const FormContainer = styled.div`
   padding-bottom: 100px;
 `;
 
-const AuthLayout = ({ children }: PropsWithChildren<{}>) => (
+const AuthLayout = ({
+  children,
+  header,
+}: PropsWithChildren<{ header: JSX.Element }>) => (
   <Content>
-    <Col span={14}>
+    <StyledCol span={12}>
       <ImageContent>
-        <Image src="/img/onboarding.svg" />
+        <DynamicAccentLogo />
       </ImageContent>
-    </Col>
-    <Col span={6}>
-      <FormContainer>{children}</FormContainer>
-    </Col>
+    </StyledCol>
+    <StyledCol>
+      <HeaderContainer>{header}</HeaderContainer>
+      <StyledRow>
+        <Col span={16} offset={4}>
+          <FormContainer>{children}</FormContainer>
+        </Col>
+      </StyledRow>
+    </StyledCol>
   </Content>
 );
 export default AuthLayout;

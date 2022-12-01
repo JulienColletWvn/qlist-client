@@ -15,7 +15,7 @@ export default {
     solidGrey: "#5e5e5e",
     pureGrey: "#979797",
     cardBorder: "#e4e4e4",
-    fontGrey: "#404040",
+    fontGrey: "#35374A",
     green: "#84CDBC",
   },
   accent: "#84CDBC",

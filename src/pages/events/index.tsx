@@ -32,10 +32,10 @@ const Events = () => {
             {data &&
               data.length > 0 &&
               data.map((event) => (
-                <StyledCol span={6} key={event.ID}>
+                <StyledCol span={6} key={event.id}>
                   <Event
                     event={event}
-                    onClick={() => navigate(`/events/${event.ID}/details`)}
+                    onClick={() => navigate(`/events/${event.id}/details`)}
                   />
                 </StyledCol>
               ))}

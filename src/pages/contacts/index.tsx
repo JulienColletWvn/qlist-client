@@ -33,7 +33,6 @@ const Contacts = () => {
 
   return (
     <ContactsApp isLoading={isLoading}>
-      <Heading>{t("contacts.list.title")}</Heading>
       <Table columns={columns} dataSource={data} />
     </ContactsApp>
   );

@@ -8,8 +8,8 @@ export const LoginApp = ({
   children,
   isLoading,
 }: PropsWithChildren<{ isLoading?: boolean }>) => (
-  <Page header={<LoginHeader />}>
-    <AuthLayout>{children}</AuthLayout>
-    {isLoading && <PageLoader isLoading={!!isLoading} />}
+  <Page>
+    <AuthLayout header={<LoginHeader />}>{children}</AuthLayout>
+    {isLoading && <PageLoader isLoading />}
   </Page>
 );

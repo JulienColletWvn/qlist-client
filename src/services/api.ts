@@ -5,7 +5,6 @@ export const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
     baseUrl: `${config.api.baseUrl}/api/`,
-    credentials: "include",
   }),
   endpoints: (builder) => ({}),
   tagTypes: ["Events", "Contacts"],

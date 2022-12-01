@@ -36,7 +36,7 @@ export type EventDetails = {
 const extendedApiSlice = api.injectEndpoints({
   endpoints: (builder) => ({
     getEvents: builder.query<Event[], void>({
-      query: () => "/user/events",
+      query: () => "/user/events/",
       providesTags: ["Events"],
     }),
     getEvent: builder.query<EventDetails, string>({

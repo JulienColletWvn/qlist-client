@@ -1,6 +1,6 @@
 export const DynamicAccentLogo = ({
   accent = "#4AC8D8",
-  fontColor = "#2E2E2E",
+  fontColor = "#35374A",
 }: {
   accent?: string;
   fontColor?: string;

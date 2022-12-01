@@ -8,9 +8,7 @@ const Header = styled.header`
   display: flex;
   align-items: center;
   z-index: 1;
-  padding: 2rem;
-  padding-left: 2.5rem;
-  padding-right: 2rem;
+  padding: 3rem 3rem 1.5rem 3rem;
   width: 100%;
 `;
 
@@ -18,7 +16,6 @@ export const HeaderNav = styled.nav<{ align?: string }>`
   display: flex;
   justify-content: ${({ align }) => align ?? "space-between"};
   width: 100%;
-  padding: 0 2% 0 2%;
 `;
 
 export const HeaderNaviList = styled.ul`
