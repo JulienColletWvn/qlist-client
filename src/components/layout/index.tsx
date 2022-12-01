@@ -17,7 +17,8 @@ export const Sider = styled.aside`
   padding-left: 1.5rem;
 `;
 
-export const Content = styled(BaseLayout.Content)`
+export const Content = styled.main`
+  flex: 1;
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;

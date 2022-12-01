@@ -6,7 +6,6 @@ import ToastProvider from "../components/toast";
 import "../i18n";
 
 import theme from "../styles/vars";
-import "../styles/index.less";
 
 const Root = () => {
   return (
