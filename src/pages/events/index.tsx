@@ -7,6 +7,7 @@ import Heading from "../../components/heading";
 import { EventsListApp } from "../../layouts/app";
 
 import { Event } from "../../layouts/events/event";
+import { NoEvent } from "../../layouts/events/noEvent";
 
 const StyledCol = styled(Col)`
   display: flex;
@@ -20,19 +21,27 @@ const Events = () => {
     t,
     i18n: { language },
   } = useTranslation();
+
   return (
     <EventsListApp isLoading={isLoading}>
-      <Heading>{t("events.list.title")}</Heading>
-      <Row gutter={16}>
-        {data?.map((event) => (
-          <StyledCol span={6} key={event.ID}>
-            <Event
-              event={event}
-              onClick={() => navigate(`/events/${event.ID}/details`)}
-            />
-          </StyledCol>
-        ))}
-      </Row>
+      {data && data.length === 0 && <NoEvent />}
+      {data && data.length > 0 && (
+        <>
+          <Heading>{t("events.list.title")}</Heading>
+          <Row gutter={16}>
+            {data &&
+              data.length > 0 &&
+              data.map((event) => (
+                <StyledCol span={6} key={event.ID}>
+                  <Event
+                    event={event}
+                    onClick={() => navigate(`/events/${event.ID}/details`)}
+                  />
+                </StyledCol>
+              ))}
+          </Row>
+        </>
+      )}
     </EventsListApp>
   );
 };

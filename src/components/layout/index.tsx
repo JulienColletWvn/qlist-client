@@ -5,6 +5,7 @@ export { Col, Row } from "antd";
 
 export const Layout = styled.div`
   display: flex;
+  height: 100%;
   flex-direction: row;
   overflow: auto;
 `;
@@ -17,6 +18,7 @@ export const Sider = styled.aside`
 `;
 
 export const Content = styled(BaseLayout.Content)`
+  height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
   padding-bottom: 3.5rem;

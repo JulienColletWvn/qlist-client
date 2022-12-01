@@ -7,7 +7,7 @@ export type EventContent = {
 };
 
 export type CreateEventParams = {
-  content: EventContent[];
+  contents: EventContent[];
   start_date: string;
   end_date: string;
   location: string;

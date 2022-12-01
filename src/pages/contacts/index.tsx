@@ -8,18 +8,33 @@ const Contacts = () => {
   const { t } = useTranslation();
   const { data, isLoading } = useGetContactsQuery();
 
+  const columns = [
+    {
+      title: t("contacts.list.columns.firstname"),
+      dataIndex: "firstname",
+      key: "firstname",
+    },
+    {
+      title: t("contacts.list.columns.lastname"),
+      dataIndex: "lastname",
+      key: "lastname",
+    },
+    {
+      title: t("contacts.list.columns.phone"),
+      dataIndex: "phone",
+      key: "phone",
+    },
+    {
+      title: t("contacts.list.columns.email"),
+      dataIndex: "email",
+      key: "email",
+    },
+  ];
+
   return (
-    <ContactsApp>
+    <ContactsApp isLoading={isLoading}>
       <Heading>{t("contacts.list.title")}</Heading>
-      <Table
-        columns={[
-          { title: "Firstname", dataIndex: "firstname", key: "firstname" },
-          { title: "Lastname", dataIndex: "lastname", key: "lastname" },
-          { title: "Phone", dataIndex: "phone", key: "phone" },
-          { title: "Email", dataIndex: "email", key: "email" },
-        ]}
-        dataSource={data}
-      />
+      <Table columns={columns} dataSource={data} />
     </ContactsApp>
   );
 };

@@ -4,6 +4,13 @@ import styled from "styled-components";
 import { Label } from "./label";
 import { Error } from "./error";
 
+export const TextInputIconContainer = styled.div<{ visible: boolean }>`
+  display: flex;
+  align-items: center;
+  opacity: ${({ visible }) => (visible ? 1 : 0)};
+  transition: 0.2s;
+`;
+
 const StyledContainer = styled.div`
   margin-bottom: 0.75rem;
 `;

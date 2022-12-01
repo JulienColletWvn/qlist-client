@@ -8,9 +8,9 @@ export const getEventContent = ({
   lang: Lang;
   event: Event;
 }): { name: string; description: string } => {
-  const { content } = event;
+  const { contents } = event;
 
-  const translatedContent = content.reduce(
+  const translatedContent = contents.reduce(
     (acc, { lang, content, type }) => ({
       ...acc,
       [lang]: { ...acc[lang as Lang], [type]: content },

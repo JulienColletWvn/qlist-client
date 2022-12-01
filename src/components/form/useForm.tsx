@@ -43,7 +43,19 @@ export function useForm<T extends string>({
 
   return {
     showErrors,
-    setShowErrors: () => setShowErrors(true),
+    setShowErrors: (showErrors?: boolean) => setShowErrors(showErrors ?? true),
+    addErrors: (errors: Partial<Record<T, string[]>>) =>
+      setFormsErrors((prev) => ({
+        ...prev,
+        ...(errors &&
+          Object.entries(errors).reduce(
+            (acc, [key, errs]) => ({
+              ...acc,
+              [key]: [...(errs as string[]), ...(prev[key as T] ?? [])],
+            }),
+            {}
+          )),
+      })),
     handleChange,
     getValue: (key: T) => formData[key],
     getErrors: (key: T): string[] => {
@@ -55,5 +67,9 @@ export function useForm<T extends string>({
     hasErrors: Object.values(formsErrors).some(
       (errors) => Array.isArray(errors) && errors.length > 0
     ),
+    hasErrorsFor: (keys: FormInput<T>["id"][]) =>
+      Object.entries(formsErrors)
+        .filter(([key]) => keys.includes(key as T))
+        .some(([, errors]) => Array.isArray(errors) && errors.length > 0),
   };
 }

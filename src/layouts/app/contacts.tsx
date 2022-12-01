@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Layout, Sider, Content } from "../../components/layout";
 import { AuthenticatedPage } from "../page";
 import { SideBar } from "../../components/sidebar";
+import { PageLoader } from "../../components/loader";
 
 const StyledSider = styled(Sider)`
   padding-top: 0.5rem;
@@ -34,8 +35,9 @@ export const ContactsApp = ({
             ]}
           />
         </StyledSider>
-        <Content>{isLoading ? <h3>Loading...</h3> : children}</Content>
+        <Content>{children}</Content>
       </Layout>
+      {isLoading && <PageLoader isLoading={!!isLoading} />}
     </AuthenticatedPage>
   );
 };

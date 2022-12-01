@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useGetUserQuery } from "../services/user";
 
 const Authenticated = ({ children }: PropsWithChildren<{}>) => {
-  const { isError, isLoading } = useGetUserQuery();
+  const { data, isError, isLoading } = useGetUserQuery();
   const navigate = useNavigate();
 
   useEffect(() => {

@@ -3,20 +3,17 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Col, Row } from "../../components/layout";
-import { TextInput, Button } from "../../components/input";
+import {
+  TextInput,
+  Button,
+  TextInputIconContainer,
+} from "../../components/input";
 import { ContactsApp } from "../../layouts/app/contacts";
 import Heading from "../../components/heading";
 import { FormInput } from "../../utils/form";
 import { Contact, useCreateContactMutation } from "../../services";
 import { Check } from "../../components/icons";
 import { useForm } from "../../components/form/useForm";
-
-const StyledCheckContainer = styled.div<{ visible: boolean }>`
-  display: flex;
-  align-items: center;
-  opacity: ${({ visible }) => (visible ? 1 : 0)};
-  transition: 0.2s;
-`;
 
 const StyledSubmitContainer = styled.div`
   padding-top: 0.75rem;
@@ -80,9 +77,11 @@ const AddContact = () => {
   return (
     <ContactsApp>
       <Heading>{t("contacts.list.title")}</Heading>
+      <h3>{t("contacts.create.single.title")}</h3>
+      <p>{t("contacts.create.single.description")}</p>
       <Row gutter={24}>
-        <Col span={12}>
-          {inputs.map((input) => {
+        <Col span={8}>
+          {inputs.slice(0, 2).map((input) => {
             const { id, label } = input;
             const value = getValue(id);
             const errors = getErrors(id);
@@ -96,25 +95,52 @@ const AddContact = () => {
                 errors={errors}
                 showErrors={showErrors}
                 suffix={
-                  <StyledCheckContainer
+                  <TextInputIconContainer
                     visible={value != null && errors?.length < 1}
                   >
                     <Check />
-                  </StyledCheckContainer>
+                  </TextInputIconContainer>
                 }
               />
             );
           })}
-          <StyledSubmitContainer>
-            <Button
-              label={t("contacts.create.submit")}
-              onClick={() => {
-                if (hasErrors) return setShowErrors();
-                addContact(formData as Contact);
-              }}
-            />
-          </StyledSubmitContainer>
         </Col>
+        <Col span={8}>
+          {inputs.slice(2, 4).map((input) => {
+            const { id, label } = input;
+            const value = getValue(id);
+            const errors = getErrors(id);
+            return (
+              <TextInput
+                id={label}
+                label={label && t(label)}
+                key={label}
+                value={value}
+                onChange={(e) => handleChange({ e, ...input })}
+                errors={errors}
+                showErrors={showErrors}
+                suffix={
+                  <TextInputIconContainer
+                    visible={value != null && errors?.length < 1}
+                  >
+                    <Check />
+                  </TextInputIconContainer>
+                }
+              />
+            );
+          })}
+        </Col>
+      </Row>
+      <Row>
+        <StyledSubmitContainer>
+          <Button
+            label={t("contacts.create.submit")}
+            onClick={() => {
+              if (hasErrors) return setShowErrors();
+              addContact(formData as Contact);
+            }}
+          />
+        </StyledSubmitContainer>
       </Row>
     </ContactsApp>
   );

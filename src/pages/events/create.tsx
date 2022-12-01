@@ -168,7 +168,7 @@ const CreateEvent = () => {
     );
 
     addNewEvent({
-      content: content.flat() as EventContent[],
+      contents: content.flat() as EventContent[],
       start_date: formData.startDate as string,
       end_date: formData.endDate as string,
       location: formData.location as string,

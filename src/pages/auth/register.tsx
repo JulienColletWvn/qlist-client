@@ -1,15 +1,20 @@
-import { useState, useEffect, ChangeEvent, useMemo } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { TextInput, Button } from "../../components/input";
+import {
+  TextInput,
+  Button,
+  TextInputIconContainer,
+} from "../../components/input";
 import Heading from "../../components/heading";
 import { RegisterApp } from "../../layouts/app";
 import { CreateUserParams, useCreateUserMutation } from "../../services/user";
-import { getInputErrors, ValidationOptions, FormInput } from "../../utils/form";
+import { FormInput } from "../../utils/form";
 import { Check } from "../../components/icons";
 import { useToast } from "../../components/toast";
+import { useForm } from "../../components/form/useForm";
 
 export type InputName =
   | "username"
@@ -21,13 +26,6 @@ export type InputName =
 
 const StyledSubmitContainer = styled.div`
   padding-top: 0.75rem;
-`;
-
-const StyledCheckContainer = styled.div<{ visible: boolean }>`
-  display: flex;
-  align-items: center;
-  opacity: ${({ visible }) => (visible ? 1 : 0)};
-  transition: 0.2s;
 `;
 
 export const loginInputs: FormInput<InputName>[] = [
@@ -66,10 +64,16 @@ const detailsForm: FormInput<InputName>[] = [
   {
     id: "firstname",
     label: "forms.fields.firstname",
+    validationRules: {
+      required: true,
+    },
   },
   {
     id: "lastname",
     label: "forms.fields.lastname",
+    validationRules: {
+      required: true,
+    },
   },
   {
     id: "phone",
@@ -92,27 +96,25 @@ const Register = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { addToast } = useToast();
+  const {
+    getValue,
+    handleChange,
+    addErrors,
+    getErrors,
+    formData,
+    showErrors,
+    setShowErrors,
+    hasErrors,
+    hasErrorsFor,
+  } = useForm<InputName>({
+    inputs: [...loginInputs, ...accountForm, ...detailsForm],
+  });
 
-  const [showErrors, setShowErrors] = useState(false);
   const [step, setStep] = useState<Step>(1);
   const [addNewPost, { isSuccess, error }] = useCreateUserMutation();
-  const [formData, setFormData] = useState<Partial<Record<InputName, string>>>(
-    {}
-  );
-  const [formsErrors, setFormsErrors] = useState<
-    Partial<Record<InputName, string[]>>
-  >(
-    accountForm.reduce((acc, { validationRules, id }) => {
-      return {
-        ...acc,
-        ...(validationRules?.required && {
-          [id]: ["forms.errors.required"],
-        }),
-      };
-    }, {})
-  );
 
   const handleFormFieldsError = (error: FetchBaseQueryError) => {
+    const backendErrors: Partial<Record<InputName, string[]>> = {};
     const fieldsMapping: Record<string, InputName> = {
       "User.Firstname": "firstname",
       "User.Lastname": "lastname",
@@ -125,16 +127,18 @@ const Register = () => {
 
     (error as BackendError)?.data?.forEach((error) => {
       const field = fieldsMapping[error.FailedField];
-      if (field) {
-        setFormsErrors((prev) => ({
-          ...prev,
-          [field]: [error.Tag],
-        }));
-      }
-      if (field && accountForm.some(({ id }) => field === id)) {
-        setStep(1);
-      }
+      backendErrors[field] = [error.Tag];
     });
+
+    addErrors(backendErrors);
+
+    if (
+      Object.keys(backendErrors).some((backendErrorKey) =>
+        accountForm.some(({ id }) => backendErrorKey === id)
+      )
+    ) {
+      setStep(1);
+    }
 
     if ((error as BackendError)?.data) setShowErrors(true);
   };
@@ -153,79 +157,53 @@ const Register = () => {
       handleFormFieldsError(error);
     if (error && "status" in error && error.status === 422)
       handleUserCreationError(error);
+    if (error)
+      addToast({
+        id: Date.now() + "error",
+        title: t("errors.unknown"),
+        type: "danger",
+      });
   }, [error]);
 
   useEffect(() => {
     if (isSuccess) navigate("/events");
   }, [isSuccess]);
 
-  const handleChange = ({
-    e,
-    key,
-    validationOptions,
-    transform,
-  }: {
-    e: ChangeEvent<HTMLInputElement>;
-    key: InputName;
-    validationOptions?: ValidationOptions;
-    transform?(nextValue: string): string;
-  }) => {
-    const value = transform ? transform(e.target.value) : e.target.value;
-    setFormData((prev) => ({ ...prev, [key]: value }));
-    if (validationOptions)
-      setFormsErrors((prev) => ({
-        ...prev,
-        [key]: getInputErrors({
-          value,
-          ...validationOptions,
-        }).map((e) => "forms.errors." + e),
-      }));
-  };
-
   const steps: Record<Step, JSX.Element> = {
     1: (
       <>
         <h3>{t("register.form.name.title")}</h3>
         <p>{t("register.form.name.description")}</p>
-        {accountForm.map(({ id, label, validationRules, type, transform }) => (
-          <TextInput
-            key={id}
-            id={id}
-            label={label && t(label)}
-            type={type}
-            value={formData[id] ?? ""}
-            onChange={(e) =>
-              handleChange({
-                e,
-                key: id,
-                validationOptions: validationRules,
-                transform,
-              })
-            }
-            errors={showErrors ? formsErrors[id]?.map((e) => t(e)) : []}
-            suffix={
-              <StyledCheckContainer
-                visible={
-                  formData[id] != null &&
-                  validationRules != null &&
-                  formsErrors[id]?.length == 0
-                }
-              >
-                <Check />
-              </StyledCheckContainer>
-            }
-          />
-        ))}
+        {accountForm.map((input) => {
+          const { id, label } = input;
+          const value = getValue(id);
+          const errors = getErrors(id);
+          return (
+            <TextInput
+              id={label}
+              label={label && t(label)}
+              key={label}
+              value={value}
+              onChange={(e) => handleChange({ e, ...input })}
+              errors={errors}
+              showErrors={showErrors}
+              type={input.type}
+              suffix={
+                <TextInputIconContainer
+                  visible={value != null && errors?.length < 1}
+                >
+                  <Check />
+                </TextInputIconContainer>
+              }
+            />
+          );
+        })}
         <StyledSubmitContainer>
           <Button
             onClick={() => {
-              if (
-                accountForm.some(
-                  ({ id }) =>
-                    formsErrors[id] && (formsErrors[id] as string[])?.length > 0
-                )
-              )
-                return setShowErrors(true);
+              if (hasErrorsFor(["username", "email", "password"]))
+                return setShowErrors();
+              setShowErrors(false);
               setStep(2);
             }}
             label={t("next")}
@@ -237,35 +215,30 @@ const Register = () => {
       <>
         <h3>{t("register.form.details.title")}</h3>
         <p>{t("register.form.details.description")}</p>
-        {detailsForm.map(({ id, label, validationRules, type, transform }) => (
-          <TextInput
-            key={id}
-            id={id}
-            label={label && t(label)}
-            type={type}
-            value={formData[id] ?? ""}
-            onChange={(e) =>
-              handleChange({
-                e,
-                key: id,
-                validationOptions: validationRules,
-                transform,
-              })
-            }
-            errors={showErrors ? formsErrors[id]?.map((e) => t(e)) : []}
-            suffix={
-              <StyledCheckContainer
-                visible={
-                  formData[id] != null &&
-                  validationRules != null &&
-                  formsErrors[id]?.length == 0
-                }
-              >
-                <Check />
-              </StyledCheckContainer>
-            }
-          />
-        ))}
+        {detailsForm.map((input) => {
+          const { id, label } = input;
+          const value = getValue(id);
+          const errors = getErrors(id);
+          return (
+            <TextInput
+              id={label}
+              label={label && t(label)}
+              key={label}
+              value={value}
+              onChange={(e) => handleChange({ e, ...input })}
+              errors={errors}
+              showErrors={showErrors}
+              type={input.type}
+              suffix={
+                <TextInputIconContainer
+                  visible={value != null && errors?.length < 1}
+                >
+                  <Check />
+                </TextInputIconContainer>
+              }
+            />
+          );
+        })}
         <StyledSubmitContainer>
           <Button
             onClick={() => setStep(1)}
@@ -273,14 +246,15 @@ const Register = () => {
             style="outline"
           />
           <Button
-            onClick={() =>
+            onClick={() => {
+              if (hasErrors) return setShowErrors();
               addNewPost(
                 Object.entries(formData).reduce(
                   (acc, [key, value]) => ({ ...acc, [key]: value }),
                   {} as CreateUserParams
                 )
-              )
-            }
+              );
+            }}
             label={t("validate")}
           />
         </StyledSubmitContainer>

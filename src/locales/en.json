@@ -1,67 +1,52 @@
 {
-  "languages": {
-    "fr": "French",
-    "en": "English",
-    "nl": "Dutch"
-  },
-  "next": "Next",
-  "previous": "Previous",
-  "validate": "Validate",
-  "login": {
-    "title": "Login"
-  },
-  "register": {
-    "title": "Create account",
-    "form": {
-      "name": {
-        "title": "Account name",
-        "description": "The name of your account will be visible by other members of your event creation team."
+  "contacts": {
+    "create": {
+      "single": {
+        "title": "Add a single contact",
+        "description": "Add a single contact to your contacts list. A contact must have a unique email address."
       },
-      "details": {
-        "title": "Account details",
-        "description": "Those fields are not mandatory, but they unlock some features or allow us to send you more personalised content."
-      }
-    }
-  },
-  "header": {
-    "login": "Login",
-    "register": "Register",
-    "profile": "Profile",
-    "events": "Events",
-    "contacts": "Contacts",
-    "logout": "Logout"
-  },
-  "forms": {
-    "fields": {
-      "username": "User name",
-      "email": "Email",
-      "password": "Password",
-      "firstname": "First name",
-      "lastname": "Last name",
-      "phone": "Phone"
+      "fields": {
+        "email": {
+          "placeholder": "steve.jobs@apple.com",
+          "title": "Email"
+        },
+        "firstname": {
+          "placeholder": "Steve",
+          "title": "Firstname"
+        },
+        "lastname": {
+          "placeholder": "Jobs",
+          "title": "Lastname"
+        },
+        "phone": {
+          "placeholder": "0032432323232",
+          "title": "Phone"
+        }
+      },
+      "submit": "Submit"
     },
-    "errors": {
-      "minLength": "Minimal length not reached",
-      "maxLength": "Maximal length reached",
-      "invalidEmail": "Invalid E-Mail",
-      "invalidPhoneNumber": "Invalid Phone Number",
-      "required": "Empty field"
+    "list": {
+      "title": "Contacts",
+      "columns": {
+        "firstname": "First name",
+        "lastname": "Last name",
+        "phone": "Phone",
+        "email": "Email"
+      }
+    },
+    "sidebar": {
+      "add": "Add contact",
+      "contacts": "My contacts"
     }
   },
   "errors": {
-    "unknown": "Someting went wrong",
     "emailAlreadyInUse": "Email address is already in use",
-    "invalidCredentials": "Invalid credentials"
+    "invalidCredentials": "Invalid credentials",
+    "unknown": "Someting went wrong"
   },
   "event": {
-    "sidebar": {
-      "event": "Event",
-      "guests": "Guests",
-      "tickets": "Tickets",
-      "cashiers": "Cashiers",
-      "sellers": "Sellers",
-      "transactions": "Transactions",
-      "statistics": "Statistics"
+    "cashiers": {
+      "title": "Cashiers"
     },
     "details": {
       "title": "Details"
@@ -69,130 +54,158 @@
     "guests": {
       "title": "Guests"
     },
-    "tickets": {
-      "title": "Tickets"
-    },
-    "cashiers": {
-      "title": "Cashiers"
-    },
     "sellers": {
       "title": "Sellers"
     },
-    "transactions": {
-      "title": "Transactions"
+    "sidebar": {
+      "cashiers": "Cashiers",
+      "event": "Event",
+      "guests": "Guests",
+      "sellers": "Sellers",
+      "statistics": "Statistics",
+      "tickets": "Tickets",
+      "transactions": "Transactions"
     },
     "statistics": {
       "title": "Statistics"
-    }
-  },
-  "user": {
-    "sidebar": {
-      "profile": "Profile",
-      "preferences": "Preferences"
-    }
-  },
-  "contacts": {
-    "list": {
-      "title": "Contacts"
     },
-    "sidebar": {
-      "contacts": "My contacts",
-      "add": "Add contact"
+    "tickets": {
+      "title": "Tickets"
     },
-    "create": {
-      "fields": {
-        "firstname": {
-          "title": "Firstname",
-          "placeholder": "Steve"
-        },
-        "lastname": {
-          "title": "Lastname",
-          "placeholder": "Jobs"
-        },
-        "email": {
-          "title": "Email",
-          "placeholder": "steve.jobs@apple.com"
-        },
-        "phone": {
-          "title": "Phone",
-          "placeholder": "0032432323232"
-        }
-      },
-      "submit": "Submit"
+    "transactions": {
+      "title": "Transactions"
     }
   },
   "events": {
-    "list": {
-      "title": "My events"
-    },
-    "sidebar": {
-      "events": "My events",
-      "create": "Create Event"
-    },
     "create": {
-      "title": "New event",
-      "submit": {
-        "title": "Create event",
-        "description": "Once created, you will be able to add guests, tickets, cachiers, etc...",
-        "button": "Got it !"
-      },
       "fields": {
-        "name": {
-          "title": "Event name",
-          "placeholder": "\"New Year Party\", \"Open House Day\", \"Beer Festival\",..."
-        },
-        "description": {
-          "title": "Description",
-          "placeholder": "\"Annual corporate party for employees from Brussels's offices\",..."
+        "capacity": {
+          "description": "Select how many tickets can be distributed",
+          "placeholder": "500",
+          "title": "Event capacity"
         },
         "contents": {
-          "title": "Event contents",
-          "tip": {
-            "title": "About languages",
-            "description": "Fill in the contents in the languages you want your event to be displayed in."
-          },
           "errors": {
             "incompleteLanguage": "{{lang}} is missing some content",
             "missingContent": "You must define content in at least one language"
-          }
+          },
+          "tip": {
+            "description": "Fill in the contents in the languages you want your event to be displayed in.",
+            "title": "About languages"
+          },
+          "title": "Event contents"
         },
         "dates": {
-          "title": "Event dates",
-          "description": "When is your event starting and ending ?"
+          "description": "When is your event starting and ending ?",
+          "title": "Event dates"
+        },
+        "description": {
+          "placeholder": "\"Annual corporate party for employees from Brussels's offices\",...",
+          "title": "Description"
+        },
+        "details": {
+          "disabilityFriendly": {
+            "title": "Disability friendly"
+          },
+          "parking": {
+            "title": "Free parking"
+          },
+          "public": {
+            "description": "A public event will be discoverable by other users.",
+            "title": "Public"
+          },
+          "tip": {
+            "description": "Public events can be discoverbale by every user.",
+            "title": "About public events"
+          },
+          "wifi": {
+            "title": "Free wifi"
+          }
         },
         "images": {
           "title": "Images"
         },
         "location": {
-          "title": "Event location",
           "description": "Where is your event taking place ?",
-          "placeholder": "\"On Brussels's offices rooftop\",..."
+          "placeholder": "\"On Brussels's offices rooftop\",...",
+          "title": "Event location"
         },
-        "capacity": {
-          "title": "Event capacity",
-          "description": "Select how many tickets can be distributed",
-          "placeholder": "500"
-        },
-        "details": {
-          "wifi": {
-            "title": "Free wifi"
-          },
-          "public": {
-            "title": "Public",
-            "description": "A public event will be discoverable by other users."
-          },
-          "parking": {
-            "title": "Free parking"
-          },
-          "disabilityFriendly": {
-            "title": "Disability friendly"
-          },
-          "tip": {
-            "title": "About public events",
-            "description": "Public events can be discoverbale by every user."
-          }
+        "name": {
+          "placeholder": "\"New Year Party\", \"Open House Day\", \"Beer Festival\",...",
+          "title": "Event name"
         }
-      }
+      },
+      "submit": {
+        "button": "Got it !",
+        "description": "Once created, you will be able to add guests, tickets, cachiers, etc...",
+        "title": "Create event"
+      },
+      "title": "New event"
+    },
+    "list": {
+      "noEvent": {
+        "title": "No event found"
+      },
+      "title": "My events"
+    },
+    "sidebar": {
+      "create": "Create Event",
+      "events": "My events"
     }
-  }
+  },
+  "forms": {
+    "errors": {
+      "invalidEmail": "Invalid E-Mail",
+      "invalidPhoneNumber": "Invalid Phone Number",
+      "maxLength": "Maximal length reached",
+      "minLength": "Minimal length not reached",
+      "required": "Empty field"
+    },
+    "fields": {
+      "email": "Email",
+      "firstname": "First name",
+      "lastname": "Last name",
+      "password": "Password",
+      "phone": "Phone",
+      "username": "User name"
+    }
+  },
+  "header": {
+    "contacts": "Contacts",
+    "events": "Events",
+    "login": "Login",
+    "logout": "Logout",
+    "profile": "Profile",
+    "register": "Register"
+  },
+  "languages": {
+    "en": "English",
+    "fr": "French",
+    "nl": "Dutch"
+  },
+  "login": {
+    "title": "Login"
+  },
+  "next": "Next",
+  "previous": "Previous",
+  "register": {
+    "form": {
+      "details": {
+        "description": "Those fields are not mandatory, but they unlock some features or allow us to send you more personalised content.",
+        "title": "Account details"
+      },
+      "name": {
+        "description": "The name of your account will be visible by other members of your event creation team.",
+        "title": "Account name"
+      }
+    },
+    "title": "Create account"
+  },
+  "user": {
+    "sidebar": {
+      "preferences": "Preferences",
+      "profile": "Profile"
+    }
+  },
+  "validate": "Validate"
 }

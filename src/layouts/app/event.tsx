@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { Layout, Sider, Content } from "../../components/layout";
 import { AuthenticatedPage } from "../page";
 import { SideBar } from "../../components/sidebar";
+import { PageLoader } from "../../components/loader";
 
 const StyledSider = styled(Sider)`
   padding-top: 0.5rem;
@@ -61,7 +62,8 @@ export const EventApp = ({
             ]}
           />
         </StyledSider>
-        <Content>{isLoading ? <h3>Loading...</h3> : children}</Content>
+        <Content>{children}</Content>
+        {isLoading && <PageLoader isLoading={!!isLoading} />}
       </Layout>
     </AuthenticatedPage>
   );
