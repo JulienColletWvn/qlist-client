@@ -32,17 +32,18 @@ export const TextInput = ({
   errors,
   ...props
 }: InputProps & {
-  label?: string;
+  key?: string;
+  label?: string | null;
   errors?: string[];
   showErrors?: boolean;
 }) => (
-  <StyledContainer>
+  <StyledContainer key={label}>
     {label && id && <Label name={id} label={label} />}
     <StyledInput {...props} />
     {errors &&
       showErrors &&
       errors.map((error, i, a) => (
-        <Error>{`${error}${i < a.length - 1 ? ", " : ""}`}</Error>
+        <Error key={error}>{`${error}${i < a.length - 1 ? ", " : ""}`}</Error>
       ))}
   </StyledContainer>
 );

@@ -38,7 +38,7 @@ const StyledTitle = styled.span`
 
 export type ToastProps = {
   id: string;
-  title?: string;
+  title?: string | null;
   type: "success" | "danger";
   timeOut?: number;
 };

@@ -1,13 +1,13 @@
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { useGetEventsQuery } from "../../services";
 import { Row, Col } from "../../components/layout";
 import Heading from "../../components/heading";
 import { EventsListApp } from "../../layouts/app";
 
 import { Event } from "../../layouts/events/event";
 import { NoEvent } from "../../layouts/events/noEvent";
+import { useGetEvents } from "../../services";
 
 const StyledCol = styled(Col)`
   display: flex;
@@ -15,7 +15,7 @@ const StyledCol = styled(Col)`
 `;
 
 const Events = () => {
-  const { data, isLoading } = useGetEventsQuery();
+  const { data, isLoading } = useGetEvents();
   const navigate = useNavigate();
   const {
     t,

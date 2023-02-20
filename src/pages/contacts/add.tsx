@@ -11,15 +11,15 @@ import {
 import { ContactsApp } from "../../layouts/app/contacts";
 import Heading from "../../components/heading";
 import { FormInput } from "../../utils/form";
-import { Contact, useCreateContactsMutation } from "../../services";
 import { Check } from "../../components/icons";
 import { useForm } from "../../components/form/useForm";
+import { useCreateContacts, Contact } from "../../services";
 
 const StyledSubmitContainer = styled.div`
   padding-top: 0.75rem;
 `;
 
-type InputName = "email" | "firstname" | "lastname" | "phone";
+type InputName = keyof Contact;
 
 export const inputs: FormInput<InputName>[] = [
   {
@@ -58,8 +58,8 @@ export const inputs: FormInput<InputName>[] = [
 const AddContact = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [addContacts, { isLoading, isSuccess, isError }] =
-    useCreateContactsMutation();
+  const { mutate, isSuccess } = useCreateContacts();
+
   const {
     getValue,
     handleChange,
@@ -137,7 +137,7 @@ const AddContact = () => {
             label={t("contacts.create.submit")}
             onClick={() => {
               if (hasErrors) return setShowErrors();
-              addContacts([{ ...formData, lang: "en" }]);
+              mutate([{ ...formData, lang: "en" }]);
             }}
           />
         </StyledSubmitContainer>

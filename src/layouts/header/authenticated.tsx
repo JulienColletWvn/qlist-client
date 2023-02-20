@@ -1,16 +1,16 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useLazyLogoutQuery } from "../../services/auth";
 import { LangSelector } from "../../components/langSelector";
 
 import Header, { HeaderNav, HeaderNavItem, HeaderNaviList } from "./header";
+import { useLogout } from "../../services";
 
 export const AuthenticatedHeader = () => {
-  const [trigger, { isSuccess }] = useLazyLogoutQuery();
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { t } = useTranslation();
+  const { mutate, isSuccess } = useLogout();
 
   useEffect(() => {
     if (isSuccess) navigate("/");
@@ -40,7 +40,7 @@ export const AuthenticatedHeader = () => {
           >
             {t("header.profile")}
           </HeaderNavItem>
-          <HeaderNavItem onClick={() => trigger()}>
+          <HeaderNavItem onClick={() => mutate()}>
             {t("header.logout")}
           </HeaderNavItem>
           <HeaderNavItem>

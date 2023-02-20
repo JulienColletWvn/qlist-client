@@ -1,9 +1,9 @@
 import { PropsWithChildren, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useGetUserQuery } from "../services/user";
+import { useGetUser } from "../services";
 
 const Authenticated = ({ children }: PropsWithChildren<{}>) => {
-  const { data, isError, isLoading } = useGetUserQuery();
+  const { isError, isLoading } = useGetUser();
   const navigate = useNavigate();
 
   useEffect(() => {

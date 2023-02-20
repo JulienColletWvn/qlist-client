@@ -1,6 +1,4 @@
 import { ThemeProvider } from "styled-components";
-import { Provider } from "react-redux";
-import { store } from "../store";
 import { Outlet } from "react-router-dom";
 import ToastProvider from "../components/toast";
 import "../i18n";
@@ -9,13 +7,11 @@ import theme from "../styles/vars";
 
 const Root = () => {
   return (
-    <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <ToastProvider>
-          <Outlet />
-        </ToastProvider>
-      </ThemeProvider>
-    </Provider>
+    <ThemeProvider theme={theme}>
+      <ToastProvider>
+        <Outlet />
+      </ToastProvider>
+    </ThemeProvider>
   );
 };
 

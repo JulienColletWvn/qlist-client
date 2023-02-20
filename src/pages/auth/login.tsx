@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 import styled from "styled-components";
-import { useLazyLoginQuery } from "../../services/auth";
 import {
   TextInput,
   Button,
@@ -14,6 +13,7 @@ import { loginInputs, InputName } from "./register";
 import { useToast } from "../../components/toast";
 import { useForm } from "../../components/form/useForm";
 import { Check } from "../../components/icons";
+import { useLogin } from "../../services/auth";
 
 const StyledSubmitContainer = styled.div`
   padding-top: 0.75rem;
@@ -23,20 +23,7 @@ const Login = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { addToast } = useToast();
-  const [trigger, { isSuccess, isError, isLoading }] = useLazyLoginQuery();
-
-  useEffect(() => {
-    fetch("http://localhost:3001/api/auth/login", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: "ju.collet@gmail.com",
-        password: "trdsb6qm",
-      }),
-    });
-  }, []);
+  const { mutate, isSuccess, isError, isLoading } = useLogin();
 
   const {
     getValue,
@@ -93,7 +80,7 @@ const Login = () => {
           onClick={() =>
             hasErrors
               ? setShowErrors()
-              : trigger({
+              : mutate({
                   email: String(formData.email),
                   password: String(formData.password),
                 })

@@ -15,8 +15,8 @@ import Heading from "../../components/heading";
 import { Tip } from "../../components/tip";
 import { Lang } from "../../types";
 import { getInputErrors, ValidationOptions } from "../../utils/form";
-import { useCreateEventMutation, EventContent } from "../../services";
 import { useToast } from "../../components/toast";
+import { useCreateEvent, EventContent } from "../../services";
 
 const StyledError = styled.span`
   font-size: 12px;
@@ -98,8 +98,7 @@ const CreateEvent = () => {
     ),
   });
   const [showErrors, setShowErrors] = useState(false);
-  const [addNewEvent, { isSuccess, error, isLoading }] =
-    useCreateEventMutation();
+  const { mutate, isSuccess, error, isLoading } = useCreateEvent();
 
   useEffect(() => {
     if (error)
@@ -167,7 +166,7 @@ const CreateEvent = () => {
         .filter(Boolean)
     );
 
-    addNewEvent({
+    mutate({
       contents: content.flat() as EventContent[],
       start_date: formData.startDate as string,
       end_date: formData.endDate as string,

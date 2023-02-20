@@ -1,4 +1,5 @@
-import { api } from "./api";
+import { useQuery } from "react-query";
+import { request } from "./utils";
 
 type User = {
   email: string;
@@ -6,28 +7,7 @@ type User = {
   lastname: string;
 };
 
-export type CreateUserParams = {
-  email: string;
-  password: string;
-  firstname: string;
-  lastname: string;
-};
+const getUser = async () => request<User>({ url: "/user" });
 
-export const extendedApiSlice = api.injectEndpoints({
-  endpoints: (builder) => ({
-    getUser: builder.query<User | string, void>({
-      query: () => "/user",
-    }),
-    createUser: builder.mutation({
-      query: (body: CreateUserParams) => {
-        return {
-          url: "/auth/register",
-          method: "POST",
-          body,
-        };
-      },
-    }),
-  }),
-});
-
-export const { useGetUserQuery, useCreateUserMutation } = extendedApiSlice;
+export const useGetUser = () =>
+  useQuery(["user"], getUser, { staleTime: 10 * (60 * 1000) });

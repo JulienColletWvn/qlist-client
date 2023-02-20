@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import {
@@ -10,11 +9,11 @@ import {
 } from "../../components/input";
 import Heading from "../../components/heading";
 import { RegisterApp } from "../../layouts/app";
-import { CreateUserParams, useCreateUserMutation } from "../../services/user";
 import { FormInput } from "../../utils/form";
 import { Check } from "../../components/icons";
 import { useToast } from "../../components/toast";
 import { useForm } from "../../components/form/useForm";
+import { RegisterParams, useRegister, RegisterError } from "../../services";
 
 export type InputName =
   | "username"
@@ -111,9 +110,9 @@ const Register = () => {
   });
 
   const [step, setStep] = useState<Step>(1);
-  const [addNewPost, { isSuccess, error }] = useCreateUserMutation();
+  const { isSuccess, mutate, error } = useRegister();
 
-  const handleFormFieldsError = (error: FetchBaseQueryError) => {
+  const handleFormFieldsError = (error: RegisterError) => {
     const backendErrors: Partial<Record<InputName, string[]>> = {};
     const fieldsMapping: Record<string, InputName> = {
       "User.Firstname": "firstname",
@@ -143,8 +142,8 @@ const Register = () => {
     if ((error as BackendError)?.data) setShowErrors(true);
   };
 
-  const handleUserCreationError = (error: FetchBaseQueryError) => {
-    if ((error.data as { code: number })?.code === 1001)
+  const handleUserCreationError = (error: RegisterError) => {
+    if ("code" in error.data && error.data.code === 1001)
       return addToast({
         id: Date.now() + "duplicated",
         title: t("errors.emailAlreadyInUse"),
@@ -248,10 +247,10 @@ const Register = () => {
           <Button
             onClick={() => {
               if (hasErrors) return setShowErrors();
-              addNewPost(
+              mutate(
                 Object.entries(formData).reduce(
                   (acc, [key, value]) => ({ ...acc, [key]: value }),
-                  {} as CreateUserParams
+                  {} as RegisterParams
                 )
               );
             }}

@@ -1,6 +1,9 @@
 import { ConfigProvider } from "antd";
 import { RouterProvider } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { router } from "./router";
+
+const client = new QueryClient();
 
 export default () => (
   <ConfigProvider
@@ -11,6 +14,8 @@ export default () => (
       },
     }}
   >
-    <RouterProvider router={router} />
+    <QueryClientProvider client={client}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   </ConfigProvider>
 );

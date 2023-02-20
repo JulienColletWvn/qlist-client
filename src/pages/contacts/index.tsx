@@ -1,12 +1,11 @@
 import { useTranslation } from "react-i18next";
 import { ContactsApp } from "../../layouts/app/contacts";
-import Heading from "../../components/heading";
-import { useGetContactsQuery } from "../../services";
 import { Table } from "../../components/table";
+import { useGetContacts } from "../../services";
 
 const Contacts = () => {
   const { t } = useTranslation();
-  const { data, isLoading } = useGetContactsQuery();
+  const { data, isLoading } = useGetContacts();
 
   const columns = [
     {
@@ -33,7 +32,7 @@ const Contacts = () => {
 
   return (
     <ContactsApp isLoading={isLoading}>
-      <Table columns={columns} dataSource={data} />
+      <Table columns={columns} dataSource={Array.isArray(data) ? data : []} />
     </ContactsApp>
   );
 };
